@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0E1F0F402056D42300D1A939 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F3F2056D42300D1A939 /* AppDelegate.swift */; };
-		0E1F0F422056D42300D1A939 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F412056D42300D1A939 /* ViewController.swift */; };
 		0E1F0F452056D42300D1A939 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F0F432056D42300D1A939 /* Main.storyboard */; };
 		0E1F0F482056D42300D1A939 /* Docker_Client.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */; };
 		0E1F0F4A2056D42300D1A939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F0F492056D42300D1A939 /* Assets.xcassets */; };
 		0E1F0F4D2056D42300D1A939 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */; };
 		0E1F0F582056D42300D1A939 /* Docker_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F572056D42300D1A939 /* Docker_ClientTests.swift */; };
 		0E1F0F632056D42300D1A939 /* Docker_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */; };
+		0E37EF23205C15B3009D16D3 /* ContainersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */; };
+		0E37EF30205C1C5D009D16D3 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF2F205C1C5D009D16D3 /* Container.swift */; };
+		0E37EF32205C1D7A009D16D3 /* ContainerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF31205C1D7A009D16D3 /* ContainerTableViewCell.swift */; };
+		0E37EF35205C2C80009D16D3 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF34205C2C80009D16D3 /* UIUtils.swift */; };
+		0E37EF37205C2E25009D16D3 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +41,6 @@
 /* Begin PBXFileReference section */
 		0E1F0F3C2056D42300D1A939 /* Docker Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Docker Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1F0F3F2056D42300D1A939 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E1F0F412056D42300D1A939 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0E1F0F442056D42300D1A939 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E1F0F472056D42300D1A939 /* Docker_Client.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Docker_Client.xcdatamodel; sourceTree = "<group>"; };
 		0E1F0F492056D42300D1A939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,11 @@
 		0E1F0F5E2056D42300D1A939 /* Docker ClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Docker ClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker_ClientUITests.swift; sourceTree = "<group>"; };
 		0E1F0F642056D42300D1A939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainersTableViewController.swift; sourceTree = "<group>"; };
+		0E37EF2F205C1C5D009D16D3 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		0E37EF31205C1D7A009D16D3 /* ContainerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTableViewCell.swift; sourceTree = "<group>"; };
+		0E37EF34205C2C80009D16D3 /* UIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
+		0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +107,12 @@
 		0E1F0F3E2056D42300D1A939 /* Docker Client */ = {
 			isa = PBXGroup;
 			children = (
-				0E1F0F3F2056D42300D1A939 /* AppDelegate.swift */,
-				0E1F0F412056D42300D1A939 /* ViewController.swift */,
+				0E37EF33205C1E55009D16D3 /* Supporting files */,
+				0E37EF26205C15D7009D16D3 /* Controllers */,
+				0E37EF25205C15C1009D16D3 /* Views */,
+				0E37EF24205C15B9009D16D3 /* Models */,
 				0E1F0F432056D42300D1A939 /* Main.storyboard */,
-				0E1F0F492056D42300D1A939 /* Assets.xcassets */,
 				0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */,
-				0E1F0F4E2056D42300D1A939 /* Info.plist */,
-				0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */,
 			);
 			path = "Docker Client";
 			sourceTree = "<group>";
@@ -126,6 +133,43 @@
 				0E1F0F642056D42300D1A939 /* Info.plist */,
 			);
 			path = "Docker ClientUITests";
+			sourceTree = "<group>";
+		};
+		0E37EF24205C15B9009D16D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E37EF2F205C1C5D009D16D3 /* Container.swift */,
+				0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0E37EF25205C15C1009D16D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E37EF31205C1D7A009D16D3 /* ContainerTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0E37EF26205C15D7009D16D3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */,
+				0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0E37EF33205C1E55009D16D3 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				0E1F0F3F2056D42300D1A939 /* AppDelegate.swift */,
+				0E1F0F492056D42300D1A939 /* Assets.xcassets */,
+				0E1F0F4E2056D42300D1A939 /* Info.plist */,
+				0E37EF34205C2C80009D16D3 /* UIUtils.swift */,
+			);
+			name = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +306,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E1F0F422056D42300D1A939 /* ViewController.swift in Sources */,
+				0E37EF23205C15B3009D16D3 /* ContainersTableViewController.swift in Sources */,
+				0E37EF32205C1D7A009D16D3 /* ContainerTableViewCell.swift in Sources */,
+				0E37EF37205C2E25009D16D3 /* ContainerViewController.swift in Sources */,
 				0E1F0F482056D42300D1A939 /* Docker_Client.xcdatamodeld in Sources */,
+				0E37EF35205C2C80009D16D3 /* UIUtils.swift in Sources */,
+				0E37EF30205C1C5D009D16D3 /* Container.swift in Sources */,
 				0E1F0F402056D42300D1A939 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
