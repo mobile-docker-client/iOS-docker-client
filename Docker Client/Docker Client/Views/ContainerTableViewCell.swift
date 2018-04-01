@@ -12,6 +12,7 @@ class ContainerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var statusDescriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,6 +21,7 @@ class ContainerTableViewCell: UITableViewCell {
     
     func fill(with model: Container) {
         nameLabel.text = model.name
+        statusDescriptionLabel.text = model.statusDescription
         drawStatusCircle(with: model.status)
     }
 

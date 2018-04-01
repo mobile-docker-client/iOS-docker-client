@@ -14,20 +14,17 @@ class ContainersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        title = "Containers"
+        
         fillContainers()
         self.tableView.reloadData()
     }
     
     private func fillContainers() {
-        containers.append(Container(id: "1", status: .run, name: "First"))
-        containers.append(Container(id: "2", status: .pause, name: "Second"))
-        containers.append(Container(id: "3", status: .stop, name: "Third"))
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        containers.append(Container(id: "1", status: .run, statusDescription: "Up 5 seconds", name: "First"))
+        containers.append(Container(id: "2", status: .pause, statusDescription: "Up 2 minutes (Paused)", name: "Second"))
+        containers.append(Container(id: "3", status: .stop, statusDescription: "Exited (0) 38 minutes ago", name: "Third"))
     }
 
     // MARK: - Table view data source

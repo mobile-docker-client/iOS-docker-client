@@ -13,12 +13,17 @@ class ContainerViewController: UIViewController {
     var container: Container? = nil
     
     @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        idLabel.text = container?
-            .id
+        
+        title = container?.name
+        
+        idLabel.text = container?.id
+        nameLabel.text = container?.name
+        statusLabel.text = container?.statusDescription
     }
 
     override func didReceiveMemoryWarning() {

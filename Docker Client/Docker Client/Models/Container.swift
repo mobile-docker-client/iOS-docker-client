@@ -14,13 +14,17 @@ enum ContainerStatus {
 
 class Container {
     var id: String
+//    var image: String
     var name: String
+//    var created: String
     var status: ContainerStatus
+    var statusDescription: String
     
-    init(id: String, status: ContainerStatus, name: String) {
+    init(id: String, status: ContainerStatus, statusDescription: String, name: String) {
         self.id = id
         self.status = status
         self.name = name
+        self.statusDescription = statusDescription
     }
     
     func set(status: ContainerStatus) {
