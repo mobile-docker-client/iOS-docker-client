@@ -14,11 +14,11 @@ enum ContainerStatus {
 
 class Container {
     var id: String
-//    var image: String
     var name: String
-//    var created: String
+//    var created: Data
     var status: ContainerStatus
     var statusDescription: String
+//    var config: JSON
     
     init(id: String, status: ContainerStatus, statusDescription: String, name: String) {
         self.id = id
