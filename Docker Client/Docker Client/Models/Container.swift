@@ -8,35 +8,60 @@
 
 import Foundation
 
-enum ContainerStatus {
-    case run
-    case pause
-    case stop
+enum ContainerState {
+    case running
+    case paused
+    case stopped
+    case exited
 }
 
 class Container {
     var id: String
     var names: [String]
     var created: Date
-//    var created: Data
-//    var status: ContainerStatus
-//    var statusDescription: String
-//    var config: JSON
+    var statusDescription: String
+    var state: ContainerState = .exited
     
-//    init(id: String, status: ContainerStatus, statusDescription: String, name: String) {
-//        self.id = id
-//        self.status = status
-//        self.name = name
-//        self.statusDescription = statusDescription
-//    }
-    
-    init(id: String, names: [String], created: Date) {
+    init(id: String, names: [String], created: Date, state: String, statusDescription: String) {
         self.id = id
         self.names = names
         self.created = created
+        self.statusDescription = statusDescription
+        self.state = self.getContainerStateFrom(state)
     }
     
-//    func set(status: ContainerStatus) {
-//        self.status = status
-//    }
+    private func getContainerStateFrom(_ state: String) -> ContainerState {
+        switch state {
+        case "exited":
+            return .exited
+        case "running":
+            return .running
+        case "paused":
+            return .paused
+        case "stopped":
+            return .stopped
+        default:
+            return .exited
+        }
+    }
+    
+    func start() {
+        DataManager.shared.startContainerWith(id)
+    }
+    
+    func stop() {
+        DataManager.shared.stopContainerWith(id)
+    }
+    
+    func pause() {
+        DataManager.shared.pauseContainerWith(id)
+    }
+    
+    func restart() {
+        DataManager.shared.restartContainerWith(id)
+    }
+    
+    func set(state: ContainerState) {
+        self.state = state
+    }
 }

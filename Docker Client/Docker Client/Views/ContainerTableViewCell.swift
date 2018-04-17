@@ -26,19 +26,21 @@ class ContainerTableViewCell: UITableViewCell {
 //        drawStatusCircle(with: model.status)
     }
 
-    private func drawStatusCircle(with status: ContainerStatus) {
+    private func drawStatusCircle(with status: ContainerState) {
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: statusView.frame.width / 2, y: statusView.frame.height / 2), radius: CGFloat(6),
                                       startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = circlePath.cgPath
         
         switch status {
-        case .run:
+        case .running:
             shapeLayer.fillColor = UIColor.appleGreen.cgColor
-        case .pause:
+        case .paused:
             shapeLayer.fillColor = UIColor.appleYellow.cgColor
-        case .stop:
+        case .stopped:
             shapeLayer.fillColor = UIColor.appleRed.cgColor
+        case .exited:
+            shapeLayer.fillColor = UIColor.black.cgColor
         }
         
         statusView.layer.addSublayer(shapeLayer)

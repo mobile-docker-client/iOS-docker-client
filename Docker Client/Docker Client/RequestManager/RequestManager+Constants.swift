@@ -7,5 +7,6 @@
 //
 
 struct BackendString {
+    static let pthContainers = "/containers"
     static let pthAllContainers = "/containers/json"
 }

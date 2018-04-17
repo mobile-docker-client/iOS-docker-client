@@ -8,6 +8,6 @@
 
 
 class Person {
-    var server: String?
+    var server: String? = "http://46.101.7.101:2376"
     var containers: [Container]?
 }
