@@ -32,7 +32,7 @@ extension RequestManager {
         
         switch data.result {
         case .success(_):
-            json = try! JSON(data: data.data!)
+            json = try? JSON(data: data.data!)
         case .failure(let value):
             isError = true
             err = value

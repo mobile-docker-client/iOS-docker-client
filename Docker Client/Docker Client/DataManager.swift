@@ -25,9 +25,13 @@ class DataManager {
         self.person = Person()
     }
     
+    func getAllContainers() {
+        RequestManager.shared.getAllContainers()
+    }
+    
     func allContainersReceived(_ data: JSON) {
         var containers: [Container] = []
-        print(data)
+        
         for container in data.arrayValue {
             let id: String = container["Id"].stringValue
             let image: String = container["Image"].stringValue
@@ -46,6 +50,6 @@ class DataManager {
     }
     
     func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool) {
-        
+        delegate?.resultOfContainerActionWith(id, action, isError: isError)
     }
 }
