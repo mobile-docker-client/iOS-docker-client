@@ -11,6 +11,7 @@ import SwiftyJSON
 
 protocol DataManagerDelegate {
     func allContainersUpdate()
+    func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool)
 }
 
 class DataManager {
@@ -40,19 +41,11 @@ class DataManager {
         delegate?.allContainersUpdate()
     }
     
-    func startContainerWith(_ id: String) {
-        RequestManager.shared.startContainerWith(id)
+    func makeContainerActionWith(_ id: String, _ action: ContainerAction) {
+        RequestManager.shared.makeContainerActionWith(id, action)
     }
     
-    func stopContainerWith(_ id: String) {
-        RequestManager.shared.stopContainerWith(id)
-    }
-    
-    func pauseContainerWith(_ id: String) {
-        RequestManager.shared.pauseContainerWith(id)
-    }
-    
-    func restartContainerWith(_ id: String) {
-        RequestManager.shared.restartContainerWith(id)
+    func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool) {
+        
     }
 }

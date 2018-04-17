@@ -20,7 +20,7 @@ class ContainerTableViewCell: UITableViewCell {
     }
     
     func fill(with model: Container) {
-        nameLabel.text = model.id
+        nameLabel.text = model.firstName
 //        nameLabel.text = model.name
 //        statusDescriptionLabel.text = model.statusDescription
 //        drawStatusCircle(with: model.status)

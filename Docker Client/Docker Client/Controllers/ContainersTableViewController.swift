@@ -58,7 +58,7 @@ class ContainersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let pauseAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-//            self.containers[indexPath.row].set(status: .pause)
+            self.containers[indexPath.row].set(state: .paused)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             success(true)
         })
@@ -176,5 +176,8 @@ extension ContainersTableViewController: DataManagerDelegate {
         self.tableView.reloadData()
         self.hud.dismiss()
         self.refreshControl?.endRefreshing()
+    }
+    
+    func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool) {
     }
 }

@@ -17,19 +17,7 @@ extension RequestManager {
         RequestManager.shared._baseGET(.allContainers, parameters: parameters)
     }
     
-    func startContainerWith(_ id: String) {
-        RequestManager.shared._basePOST(.startContainerWith(id), parameters: nil)
-    }
-    
-    func stopContainerWith(_ id: String) {
-        RequestManager.shared._basePOST(.stopContainerWith(id), parameters: nil)
-    }
-    
-    func pauseContainerWith(_ id: String) {
-        RequestManager.shared._basePOST(.pauseContainerWith(id), parameters: nil)
-    }
-    
-    func restartContainerWith(_ id: String) {
-        RequestManager.shared._basePOST(.restartContainerWith(id), parameters: nil)
+    func makeContainerActionWith(_ id: String, _ action: ContainerAction) {
+        RequestManager.shared._basePOST(.containerActionWith(id, action))
     }
 }

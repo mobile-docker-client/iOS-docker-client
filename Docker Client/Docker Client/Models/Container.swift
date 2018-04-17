@@ -15,9 +15,24 @@ enum ContainerState {
     case exited
 }
 
+enum ContainerAction: String {
+    case start = "start"
+    case stop = "stop"
+    case pause = "pause"
+    case restart = "restart"
+}
+
 class Container {
     var id: String
     var names: [String]
+    var firstName: String? {
+        get {
+            if names.count > 0 {
+                return names[0]
+            }
+            return nil
+        }
+    }
     var created: Date
     var statusDescription: String
     var state: ContainerState = .exited
@@ -45,20 +60,8 @@ class Container {
         }
     }
     
-    func start() {
-        DataManager.shared.startContainerWith(id)
-    }
-    
-    func stop() {
-        DataManager.shared.stopContainerWith(id)
-    }
-    
-    func pause() {
-        DataManager.shared.pauseContainerWith(id)
-    }
-    
-    func restart() {
-        DataManager.shared.restartContainerWith(id)
+    func make(action: ContainerAction) {
+        DataManager.shared.makeContainerActionWith(id, action)
     }
     
     func set(state: ContainerState) {
