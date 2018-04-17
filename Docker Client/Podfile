@@ -6,7 +6,7 @@ target 'Docker Client' do
   use_frameworks!
   # Pods for Docker Client
   pod 'Just'
-  
+  pod 'SwiftyJSON'  
   target 'Docker ClientTests' do
     inherit! :search_paths
     # Pods for testing
