@@ -1,0 +1,6 @@
+framework module Pods_Docker_ClientUITests {
+  umbrella header "Pods-Docker ClientUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

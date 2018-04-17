@@ -1,0 +1,6 @@
+framework module Pods_Docker_Client {
+  umbrella header "Pods-Docker Client-umbrella.h"
+
+  export *
+  module * { export * }
+}
