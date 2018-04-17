@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ContainersTableViewController: UITableViewController {
 
     var containers: [Container] = []
+    let hud: JGProgressHUD = JGProgressHUD(style: .dark)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hud.textLabel.text = "Loading"
+        self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        DataManager.shared.delegate = self
         title = "Containers"
         
         fillContainers()
@@ -22,11 +27,17 @@ class ContainersTableViewController: UITableViewController {
     }
     
     private func fillContainers() {
-        containers.append(Container(id: "1", status: .run, statusDescription: "Up 5 seconds", name: "First"))
-        containers.append(Container(id: "2", status: .pause, statusDescription: "Up 2 minutes (Paused)", name: "Second"))
-        containers.append(Container(id: "3", status: .stop, statusDescription: "Exited (0) 38 minutes ago", name: "Third"))
+        hud.show(in: self.view)
+        RequestManager.shared._baseGET(.allContainers)
+//        containers.append(Container(id: "1", status: .run, statusDescription: "Up 5 seconds", name: "First"))
+//        containers.append(Container(id: "2", status: .pause, statusDescription: "Up 2 minutes (Paused)", name: "Second"))
+//        containers.append(Container(id: "3", status: .stop, statusDescription: "Exited (0) 38 minutes ago", name: "Third"))
     }
 
+    @objc func refresh() {
+        RequestManager.shared._baseGET(.allContainers)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,7 +58,7 @@ class ContainersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let pauseAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].set(status: .pause)
+//            self.containers[indexPath.row].set(status: .pause)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             success(true)
         })
@@ -56,7 +67,7 @@ class ContainersTableViewController: UITableViewController {
         pauseAction.backgroundColor = .appleYellow
         
         let startAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].set(status: .run)
+//            self.containers[indexPath.row].set(status: .run)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             success(true)
         })
@@ -65,7 +76,7 @@ class ContainersTableViewController: UITableViewController {
         startAction.backgroundColor = .appleGreen
         
         let stopAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].set(status: .stop)
+//            self.containers[indexPath.row].set(status: .stop)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             success(true)
         })
@@ -83,7 +94,7 @@ class ContainersTableViewController: UITableViewController {
         deleteAction.backgroundColor = .appleRed
         
         let restartAction = UIContextualAction(style: .normal, title:  "Restart", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].set(status: .run)
+//            self.containers[indexPath.row].set(status: .run)
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             success(true)
         })
@@ -91,13 +102,13 @@ class ContainersTableViewController: UITableViewController {
         restartAction.image = UIImage(named: "Restart")
         restartAction.backgroundColor = .appleYellow
         
-        if containers[indexPath.row].status == .run {
-            return UISwipeActionsConfiguration(actions: [stopAction, pauseAction])
-        } else if containers[indexPath.row].status == .pause {
-            return UISwipeActionsConfiguration(actions: [deleteAction, restartAction])
-        } else {
-            return UISwipeActionsConfiguration(actions: [deleteAction, startAction])
-        }
+//        if containers[indexPath.row].status == .run {
+//            return UISwipeActionsConfiguration(actions: [stopAction, pauseAction])
+//        } else if containers[indexPath.row].status == .pause {
+//            return UISwipeActionsConfiguration(actions: [deleteAction, restartAction])
+//        } else {
+        return UISwipeActionsConfiguration(actions: [deleteAction, startAction])
+//        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -157,4 +168,13 @@ class ContainersTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension ContainersTableViewController: DataManagerDelegate {
+    func allContainersUpdate() {
+        self.containers = DataManager.shared.person.containers!
+        self.tableView.reloadData()
+        self.hud.dismiss()
+        self.refreshControl?.endRefreshing()
+    }
 }

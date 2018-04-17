@@ -6,6 +6,8 @@
 //  Copyright © 2018 Artyom Sheldyaev. All rights reserved.
 //
 
+import Foundation
+
 enum ContainerStatus {
     case run
     case pause
@@ -14,20 +16,27 @@ enum ContainerStatus {
 
 class Container {
     var id: String
-    var name: String
+    var names: [String]
+    var created: Date
 //    var created: Data
-    var status: ContainerStatus
-    var statusDescription: String
+//    var status: ContainerStatus
+//    var statusDescription: String
 //    var config: JSON
     
-    init(id: String, status: ContainerStatus, statusDescription: String, name: String) {
+//    init(id: String, status: ContainerStatus, statusDescription: String, name: String) {
+//        self.id = id
+//        self.status = status
+//        self.name = name
+//        self.statusDescription = statusDescription
+//    }
+    
+    init(id: String, names: [String], created: Date) {
         self.id = id
-        self.status = status
-        self.name = name
-        self.statusDescription = statusDescription
+        self.names = names
+        self.created = created
     }
     
-    func set(status: ContainerStatus) {
-        self.status = status
-    }
+//    func set(status: ContainerStatus) {
+//        self.status = status
+//    }
 }

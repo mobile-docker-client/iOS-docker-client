@@ -23,6 +23,9 @@
 		0E37EF37205C2E25009D16D3 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */; };
 		0EEF665A2086389C00811605 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF66592086389C00811605 /* RequestManager.swift */; };
 		0EEF665C208638E000811605 /* RequestManager+ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF665B208638E000811605 /* RequestManager+ResponseHandler.swift */; };
+		0EEF665E2086613D00811605 /* RequestManager+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF665D2086613D00811605 /* RequestManager+Constants.swift */; };
+		0EEF66602086668100811605 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF665F2086668100811605 /* DataManager.swift */; };
+		0EEF6668208667EC00811605 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF6667208667EC00811605 /* Person.swift */; };
 		85298B118052349D5CCDDB5C /* Pods_Docker_ClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ECDD27C5223A04B46D5C57 /* Pods_Docker_ClientUITests.framework */; };
 		D027FA3F0E2E1F48B1C1B046 /* Pods_Docker_ClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66958726DA76538C1E5F54FF /* Pods_Docker_ClientTests.framework */; };
 		F7006F4B392983BF95AA46CC /* Pods_Docker_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4002FEC800E01E21FB3B763 /* Pods_Docker_Client.framework */; };
@@ -70,6 +73,9 @@
 		0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		0EEF66592086389C00811605 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		0EEF665B208638E000811605 /* RequestManager+ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+ResponseHandler.swift"; sourceTree = "<group>"; };
+		0EEF665D2086613D00811605 /* RequestManager+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+Constants.swift"; sourceTree = "<group>"; };
+		0EEF665F2086668100811605 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		0EEF6667208667EC00811605 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		2CA2E6DE6E243B9D54A39799 /* Pods-Docker Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Docker Client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Docker Client/Pods-Docker Client.debug.xcconfig"; sourceTree = "<group>"; };
 		66958726DA76538C1E5F54FF /* Pods_Docker_ClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Docker_ClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E2A366EEA90908F9E1CADAD /* Pods-Docker ClientUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Docker ClientUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Docker ClientUITests/Pods-Docker ClientUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -139,7 +145,9 @@
 				0E1F0F432056D42300D1A939 /* Main.storyboard */,
 				0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */,
 				0EEF66592086389C00811605 /* RequestManager.swift */,
+				0EEF665D2086613D00811605 /* RequestManager+Constants.swift */,
 				0EEF665B208638E000811605 /* RequestManager+ResponseHandler.swift */,
+				0EEF665F2086668100811605 /* DataManager.swift */,
 			);
 			path = "Docker Client";
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 				0E2FBF62207E320B00C9CB9D /* Image.swift */,
 				0E2FBF64207E321A00C9CB9D /* Volume.swift */,
 				0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */,
+				0EEF6667208667EC00811605 /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -415,12 +424,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Docker Client/Pods-Docker Client-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,12 +534,15 @@
 				0E2FBF63207E320B00C9CB9D /* Image.swift in Sources */,
 				0E37EF32205C1D7A009D16D3 /* ContainerTableViewCell.swift in Sources */,
 				0EEF665C208638E000811605 /* RequestManager+ResponseHandler.swift in Sources */,
+				0EEF6668208667EC00811605 /* Person.swift in Sources */,
 				0E2FBF65207E321A00C9CB9D /* Volume.swift in Sources */,
+				0EEF665E2086613D00811605 /* RequestManager+Constants.swift in Sources */,
 				0E37EF37205C2E25009D16D3 /* ContainerViewController.swift in Sources */,
 				0EEF665A2086389C00811605 /* RequestManager.swift in Sources */,
 				0E1F0F482056D42300D1A939 /* Docker_Client.xcdatamodeld in Sources */,
 				0E37EF35205C2C80009D16D3 /* UIUtils.swift in Sources */,
 				0E37EF30205C1C5D009D16D3 /* Container.swift in Sources */,
+				0EEF66602086668100811605 /* DataManager.swift in Sources */,
 				0E1F0F402056D42300D1A939 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,8 +5,9 @@ target 'Docker Client' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   # Pods for Docker Client
-  pod 'Just'
+  pod 'Alamofire'
   pod 'SwiftyJSON'  
+  pod 'JGProgressHUD'
   target 'Docker ClientTests' do
     inherit! :search_paths
     # Pods for testing

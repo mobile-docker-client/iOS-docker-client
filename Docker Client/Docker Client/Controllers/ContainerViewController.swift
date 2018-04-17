@@ -19,11 +19,11 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = container?.name
+        title = container?.id
         
         idLabel.text = container?.id
-        nameLabel.text = container?.name
-        statusLabel.text = container?.statusDescription
+//        nameLabel.text = container?.name
+//        statusLabel.text = container?.statusDescription
     }
 
     override func didReceiveMemoryWarning() {
