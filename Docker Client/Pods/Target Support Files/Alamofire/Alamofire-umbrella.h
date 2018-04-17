@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double JustVersionNumber;
-FOUNDATION_EXPORT const unsigned char JustVersionString[];
+FOUNDATION_EXPORT double AlamofireVersionNumber;
+FOUNDATION_EXPORT const unsigned char AlamofireVersionString[];
 
