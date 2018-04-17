@@ -19,10 +19,9 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = container?.name
-        
+        title = container?.firstName
         idLabel.text = container?.id
-        nameLabel.text = container?.name
+        nameLabel.text = container?.firstName
         statusLabel.text = container?.statusDescription
     }
 
