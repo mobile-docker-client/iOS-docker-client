@@ -21,9 +21,8 @@ class ContainerTableViewCell: UITableViewCell {
     
     func fill(with model: Container) {
         nameLabel.text = model.firstName
-//        nameLabel.text = model.name
-//        statusDescriptionLabel.text = model.statusDescription
-//        drawStatusCircle(with: model.status)
+        statusDescriptionLabel.text = model.statusDescription
+        drawStatusCircle(with: model.state!)
     }
 
     private func drawStatusCircle(with status: ContainerState) {

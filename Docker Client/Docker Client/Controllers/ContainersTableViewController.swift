@@ -8,10 +8,12 @@
 
 import UIKit
 import JGProgressHUD
+import SwiftyJSON
 
 class ContainersTableViewController: UITableViewController {
 
     var containers: [Container] = []
+    var indexPathes: [IndexPath] = []
     var swipeActionIndexPath: IndexPath? = nil
     
     let hud: JGProgressHUD = JGProgressHUD(style: .dark)
@@ -19,7 +21,6 @@ class ContainersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        hud.textLabel.text = "Loading"
         self.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         DataManager.shared.delegate = self
         title = "Containers"
@@ -29,8 +30,32 @@ class ContainersTableViewController: UITableViewController {
     }
     
     private func fillContainers() {
-        hud.show(in: self.view)
+        showHUDWithLoading()
         DataManager.shared.getAllContainers()
+    }
+    
+    private func showHUDWithError(_ text: String = "Error", timeInterval: Double = 1.5) {
+        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        hud.textLabel.text = text
+        hud.show(in: self.tableView)
+        hud.dismiss(afterDelay: timeInterval)
+    }
+    
+    private func showHUDWithLoading(_ text: String = "Loading") {
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
+        hud.textLabel.text = text
+        hud.show(in: self.tableView)
+    }
+    
+    private func showHUDWithSuccess(_ text: String = "Success", timeInterval: Double = 1.5) {
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.textLabel.text = text
+        hud.show(in: self.tableView)
+        hud.dismiss(afterDelay: timeInterval)
+    }
+    
+    private func dismissHUD() {
+        hud.dismiss()
     }
 
     @objc func refresh() {
@@ -51,60 +76,31 @@ class ContainersTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "containerCell", for: indexPath) as! ContainerTableViewCell
         
         cell.fill(with: containers[indexPath.row])
+        indexPathes.append(indexPath)
 
         return cell
     }
     
+    private func createContextualActionWith(_ action: ContainerAction, imageName: String, color: UIColor, indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: nil, handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            self.showHUDWithLoading()
+            self.containers[indexPath.row].make(action: action)
+            self.swipeActionIndexPath = indexPath
+            success(true)
+        })
+        
+        action.image = UIImage(named: imageName)
+        action.backgroundColor = color
+        
+        return action
+    }
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let pauseAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].make(action: .pause)
-            self.swipeActionIndexPath = indexPath
-            self.hud.show(in: self.view)
-            success(true)
-        })
-        
-        pauseAction.image = UIImage(named: "Pause")
-        pauseAction.backgroundColor = .appleYellow
-        
-        let startAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].make(action: .start)
-            self.swipeActionIndexPath = indexPath
-            self.hud.show(in: self.view)
-            success(true)
-        })
-        
-        startAction.image = UIImage(named: "Start")
-        startAction.backgroundColor = .appleGreen
-        
-        let stopAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].make(action: .stop)
-            self.swipeActionIndexPath = indexPath
-            self.hud.show(in: self.view)
-            success(true)
-        })
-        
-        stopAction.image = UIImage(named: "Stop")
-        stopAction.backgroundColor = .appleRed
-        
-        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers.remove(at: indexPath.row)
-            self.swipeActionIndexPath = indexPath
-            self.hud.show(in: self.view)
-            success(true)
-        })
-        
-        deleteAction.image = UIImage(named: "Delete")
-        deleteAction.backgroundColor = .appleRed
-        
-        let restartAction = UIContextualAction(style: .normal, title:  "Restart", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.containers[indexPath.row].make(action: .restart)
-            self.swipeActionIndexPath = indexPath
-            self.hud.show(in: self.view)
-            success(true)
-        })
-        
-        restartAction.image = UIImage(named: "Restart")
-        restartAction.backgroundColor = .appleYellow
+        let pauseAction = createContextualActionWith(.pause, imageName: "Pause", color: .appleYellow, indexPath: indexPath)
+        let startAction = createContextualActionWith(.start, imageName: "Start", color: .appleGreen, indexPath: indexPath)
+        let stopAction = createContextualActionWith(.stop, imageName: "Stop", color: .appleRed, indexPath: indexPath)
+        let deleteAction = createContextualActionWith(.stop, imageName: "Delete", color: .appleRed, indexPath: indexPath)
+        let restartAction = createContextualActionWith(.restart, imageName: "Restart", color: .appleYellow, indexPath: indexPath)
         
         if containers[indexPath.row].state == .running {
             return UISwipeActionsConfiguration(actions: [stopAction, pauseAction])
@@ -132,16 +128,13 @@ extension ContainersTableViewController: DataManagerDelegate {
     func allContainersUpdate() {
         self.containers = DataManager.shared.person.containers!
         self.tableView.reloadData()
-        self.hud.dismiss()
         self.refreshControl?.endRefreshing()
+        dismissHUD()
     }
     
     func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool) {
         if isError {
-            hud.textLabel.text = "Error"
-            hud.indicatorView = JGProgressHUDErrorIndicatorView()
-            hud.show(in: self.view)
-            hud.dismiss(afterDelay: 2.0)
+            showHUDWithError()
             return
         }
         
@@ -161,11 +154,18 @@ extension ContainersTableViewController: DataManagerDelegate {
                 
                 self.tableView.reloadRows(at: [swipeActionIndexPath!], with: .automatic)
                 
-                hud.textLabel.text = "Success"
-                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                hud.show(in: self.view)
-                hud.dismiss(afterDelay: 2.0)
+                showHUDWithSuccess()
                 
+                break
+            }
+        }
+    }
+    
+    func updateContainerWith(_ id: String, data: JSON) {
+        for i in 0..<containers.count {
+            if containers[i].id == id {
+                containers[i].updateWith(data)
+                self.tableView.reloadRows(at: [indexPathes[i]], with: .automatic)
                 break
             }
         }
