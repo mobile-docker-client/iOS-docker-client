@@ -12,6 +12,7 @@ import JGProgressHUD
 class ContainersTableViewController: UITableViewController {
 
     var containers: [Container] = []
+    var indexPathes: [IndexPath] = []
     var swipeActionIndexPath: IndexPath? = nil
     
     let hud: JGProgressHUD = JGProgressHUD(style: .dark)
@@ -74,60 +75,31 @@ class ContainersTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "containerCell", for: indexPath) as! ContainerTableViewCell
         
         cell.fill(with: containers[indexPath.row])
+        indexPathes.append(indexPath)
 
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let pauseAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+    private func createContextualActionWith(_ action: ContainerAction, imageName: String, color: UIColor, indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: nil, handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             self.showHUDWithLoading()
             self.containers[indexPath.row].make(action: .pause)
             self.swipeActionIndexPath = indexPath
             success(true)
         })
         
-        pauseAction.image = UIImage(named: "Pause")
-        pauseAction.backgroundColor = .appleYellow
+        action.image = UIImage(named: imageName)
+        action.backgroundColor = color
         
-        let startAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.showHUDWithLoading()
-            self.containers[indexPath.row].make(action: .start)
-            self.swipeActionIndexPath = indexPath
-            success(true)
-        })
-        
-        startAction.image = UIImage(named: "Start")
-        startAction.backgroundColor = .appleGreen
-        
-        let stopAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.showHUDWithLoading()
-            self.containers[indexPath.row].make(action: .stop)
-            self.swipeActionIndexPath = indexPath
-            success(true)
-        })
-        
-        stopAction.image = UIImage(named: "Stop")
-        stopAction.backgroundColor = .appleRed
-        
-        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.showHUDWithLoading()
-            self.containers.remove(at: indexPath.row)
-            self.swipeActionIndexPath = indexPath
-            success(true)
-        })
-        
-        deleteAction.image = UIImage(named: "Delete")
-        deleteAction.backgroundColor = .appleRed
-        
-        let restartAction = UIContextualAction(style: .normal, title:  "Restart", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            self.showHUDWithLoading()
-            self.containers[indexPath.row].make(action: .restart)
-            self.swipeActionIndexPath = indexPath
-            success(true)
-        })
-        
-        restartAction.image = UIImage(named: "Restart")
-        restartAction.backgroundColor = .appleYellow
+        return action
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let pauseAction = createContextualActionWith(.pause, imageName: "Pause", color: .appleYellow, indexPath: indexPath)
+        let startAction = createContextualActionWith(.start, imageName: "Start", color: .appleGreen, indexPath: indexPath)
+        let stopAction = createContextualActionWith(.stop, imageName: "Stop", color: .appleRed, indexPath: indexPath)
+        let deleteAction = createContextualActionWith(.stop, imageName: "Delete", color: .appleRed, indexPath: indexPath)
+        let restartAction = createContextualActionWith(.restart, imageName: "Restart", color: .appleYellow, indexPath: indexPath)
         
         if containers[indexPath.row].state == .running {
             return UISwipeActionsConfiguration(actions: [stopAction, pauseAction])
