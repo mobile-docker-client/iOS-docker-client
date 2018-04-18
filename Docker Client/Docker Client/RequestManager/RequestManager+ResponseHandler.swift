@@ -13,6 +13,7 @@ enum RequestType {
     
     case allContainers
     case containerActionWith(String, ContainerAction)
+    case inspectContainerWith(String)
     
     func path() -> String {
         switch self {
@@ -20,6 +21,8 @@ enum RequestType {
             return DataManager.shared.person.server! + BackendString.pthAllContainers
         case let .containerActionWith(id, action):
             return DataManager.shared.person.server! + "\(BackendString.pthContainers)/\(id)/\(action.rawValue)"
+        case let .inspectContainerWith(id):
+            return DataManager.shared.person.server! + "\(BackendString.pthContainers)/\(id)/json"
         }
     }
 }
@@ -43,8 +46,15 @@ extension RequestManager {
             DataManager.shared.allContainersReceived(json!)
         case (.get, .allContainers, true):
             print("Error", err!)
+            break
         case (.post, let .containerActionWith(id, action), _):
             DataManager.shared.resultOfContainerActionWith(id, action, isError: isError)
+        case (.get, let .inspectContainerWith(id), false):
+            DataManager.shared.receivedInformationAbountContainerWith(id, data: json!)
+            break
+        case (.get, let .inspectContainerWith(id), true):
+            print("Error", err!)
+            break
         default:
             print("Response not handled")
         }

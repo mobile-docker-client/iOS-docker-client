@@ -20,4 +20,8 @@ extension RequestManager {
     func makeContainerActionWith(_ id: String, _ action: ContainerAction) {
         RequestManager.shared._basePOST(.containerActionWith(id, action))
     }
+    
+    func inspectContainerWith(_ id: String) {
+        RequestManager.shared._baseGET(.inspectContainerWith(id))
+    }
 }

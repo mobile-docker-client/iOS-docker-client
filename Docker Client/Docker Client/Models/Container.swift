@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 enum ContainerState {
     case running
@@ -23,26 +24,34 @@ enum ContainerAction: String {
 }
 
 class Container {
-    var id: String
-    var names: [String]
+    var id: String?
+    var names: [String]?
     var firstName: String? {
         get {
-            if names.count > 0 {
-                return names[0]
+            if names!.count > 0 {
+                return names![0]
             }
             return nil
         }
     }
-    var created: Date
-    var statusDescription: String
-    var state: ContainerState = .exited
+    var created: Date?
+    var statusDescription: String?
+    var state: ContainerState?
     
-    init(id: String, names: [String], created: Date, state: String, statusDescription: String) {
-        self.id = id
-        self.names = names
-        self.created = created
-        self.statusDescription = statusDescription
-        self.state = self.getContainerStateFrom(state)
+    init(_ data: JSON) {
+        updateWith(data, isInitial: true)
+    }
+    
+    func updateWith(_ data: JSON, isInitial: Bool = false) {
+        if isInitial {
+            self.id = data["Id"].stringValue
+            self.state = self.getContainerStateFrom(data["State"].stringValue)
+            self.statusDescription = data["Status"].stringValue
+            self.names = data["Names"].arrayObject as! [String]
+            self.created = Date.init(timeIntervalSince1970: TimeInterval(data["Created"].intValue))
+        } else {
+            self.state = self.getContainerStateFrom(data["state"]["status"].stringValue)
+        }
     }
     
     private func getContainerStateFrom(_ state: String) -> ContainerState {
@@ -61,7 +70,7 @@ class Container {
     }
     
     func make(action: ContainerAction) {
-        DataManager.shared.makeContainerActionWith(id, action)
+        DataManager.shared.makeContainerActionWith(id!, action)
     }
     
     func set(state: ContainerState) {

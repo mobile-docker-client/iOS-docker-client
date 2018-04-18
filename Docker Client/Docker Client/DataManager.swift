@@ -12,6 +12,7 @@ import SwiftyJSON
 protocol DataManagerDelegate {
     func allContainersUpdate()
     func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool)
+    func updateContainerWith(_ id: String, data: JSON)
 }
 
 class DataManager {
@@ -33,13 +34,7 @@ class DataManager {
         var containers: [Container] = []
         
         for container in data.arrayValue {
-            let id: String = container["Id"].stringValue
-            let image: String = container["Image"].stringValue
-            let state: String = container["State"].stringValue
-            let status: String = container["Status"].stringValue
-            let names: [String] = container["Names"].arrayObject as! [String]
-            let created: Date = Date.init(timeIntervalSince1970: TimeInterval(container["Created"].intValue))
-            containers.append(Container(id: id, names: names, created: created, state: state, statusDescription: status))
+            containers.append(Container(container))
         }
         person.containers = containers
         delegate?.allContainersUpdate()
@@ -50,6 +45,15 @@ class DataManager {
     }
     
     func resultOfContainerActionWith(_ id: String, _ action: ContainerAction, isError: Bool) {
+        inspectContainerWith(id)
         delegate?.resultOfContainerActionWith(id, action, isError: isError)
+    }
+    
+    func inspectContainerWith(_ id: String) {
+        RequestManager.shared.inspectContainerWith(id)
+    }
+    
+    func receivedInformationAbountContainerWith(_ id: String, data: JSON) {
+        delegate?.updateContainerWith(id, data: data)
     }
 }

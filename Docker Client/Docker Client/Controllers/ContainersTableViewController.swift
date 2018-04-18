@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import SwiftyJSON
 
 class ContainersTableViewController: UITableViewController {
 
@@ -83,7 +84,7 @@ class ContainersTableViewController: UITableViewController {
     private func createContextualActionWith(_ action: ContainerAction, imageName: String, color: UIColor, indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: nil, handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             self.showHUDWithLoading()
-            self.containers[indexPath.row].make(action: .pause)
+            self.containers[indexPath.row].make(action: action)
             self.swipeActionIndexPath = indexPath
             success(true)
         })
@@ -155,6 +156,16 @@ extension ContainersTableViewController: DataManagerDelegate {
                 
                 showHUDWithSuccess()
                 
+                break
+            }
+        }
+    }
+    
+    func updateContainerWith(_ id: String, data: JSON) {
+        for i in 0..<containers.count {
+            if containers[i].id == id {
+                containers[i].updateWith(data)
+                self.tableView.reloadRows(at: [indexPathes[i]], with: .automatic)
                 break
             }
         }
