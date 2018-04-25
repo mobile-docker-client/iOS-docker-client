@@ -14,6 +14,7 @@
 		0E1F0F4D2056D42300D1A939 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */; };
 		0E1F0F582056D42300D1A939 /* Docker_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F572056D42300D1A939 /* Docker_ClientTests.swift */; };
 		0E1F0F632056D42300D1A939 /* Docker_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */; };
+		0E2C6CF6209075F000D49C17 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C6CF5209075F000D49C17 /* Server.swift */; };
 		0E2FBF63207E320B00C9CB9D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FBF62207E320B00C9CB9D /* Image.swift */; };
 		0E2FBF65207E321A00C9CB9D /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FBF64207E321A00C9CB9D /* Volume.swift */; };
 		0E37EF23205C15B3009D16D3 /* ContainersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */; };
@@ -65,6 +66,7 @@
 		0E1F0F5E2056D42300D1A939 /* Docker ClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Docker ClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker_ClientUITests.swift; sourceTree = "<group>"; };
 		0E1F0F642056D42300D1A939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0E2C6CF5209075F000D49C17 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		0E2FBF62207E320B00C9CB9D /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		0E2FBF64207E321A00C9CB9D /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
 		0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainersTableViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +148,6 @@
 				0E37EF26205C15D7009D16D3 /* Controllers */,
 				0E37EF25205C15C1009D16D3 /* Views */,
 				0E37EF24205C15B9009D16D3 /* Models */,
-				0E1F0F432056D42300D1A939 /* Main.storyboard */,
 				0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */,
 			);
 			path = "Docker Client";
@@ -177,6 +178,8 @@
 				0E2FBF62207E320B00C9CB9D /* Image.swift */,
 				0E2FBF64207E321A00C9CB9D /* Volume.swift */,
 				0EEF6667208667EC00811605 /* Person.swift */,
+				0E2C6CF5209075F000D49C17 /* Server.swift */,
+				0E1F0F432056D42300D1A939 /* Main.storyboard */,
 				0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */,
 			);
 			path = Models;
@@ -555,6 +558,7 @@
 				0E37EF35205C2C80009D16D3 /* UIUtils.swift in Sources */,
 				0E37EF30205C1C5D009D16D3 /* Container.swift in Sources */,
 				0EEF66602086668100811605 /* DataManager.swift in Sources */,
+				0E2C6CF6209075F000D49C17 /* Server.swift in Sources */,
 				0E1F0F402056D42300D1A939 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
