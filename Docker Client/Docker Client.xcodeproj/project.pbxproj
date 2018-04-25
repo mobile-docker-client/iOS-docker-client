@@ -15,6 +15,9 @@
 		0E1F0F582056D42300D1A939 /* Docker_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F572056D42300D1A939 /* Docker_ClientTests.swift */; };
 		0E1F0F632056D42300D1A939 /* Docker_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */; };
 		0E2C6CF6209075F000D49C17 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C6CF5209075F000D49C17 /* Server.swift */; };
+		0E2C6CF82090776F00D49C17 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C6CF72090776F00D49C17 /* SettingsTableViewController.swift */; };
+		0E2C6CFA209079C300D49C17 /* SettingsServersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C6CF9209079C300D49C17 /* SettingsServersTableViewController.swift */; };
+		0E2C6CFC20907A7100D49C17 /* SettingsServerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C6CFB20907A7100D49C17 /* SettingsServerTableViewCell.swift */; };
 		0E2FBF63207E320B00C9CB9D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FBF62207E320B00C9CB9D /* Image.swift */; };
 		0E2FBF65207E321A00C9CB9D /* Volume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2FBF64207E321A00C9CB9D /* Volume.swift */; };
 		0E37EF23205C15B3009D16D3 /* ContainersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */; };
@@ -67,6 +70,9 @@
 		0E1F0F622056D42300D1A939 /* Docker_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Docker_ClientUITests.swift; sourceTree = "<group>"; };
 		0E1F0F642056D42300D1A939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E2C6CF5209075F000D49C17 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		0E2C6CF72090776F00D49C17 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		0E2C6CF9209079C300D49C17 /* SettingsServersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServersTableViewController.swift; sourceTree = "<group>"; };
+		0E2C6CFB20907A7100D49C17 /* SettingsServerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServerTableViewCell.swift; sourceTree = "<group>"; };
 		0E2FBF62207E320B00C9CB9D /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		0E2FBF64207E321A00C9CB9D /* Volume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Volume.swift; sourceTree = "<group>"; };
 		0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainersTableViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				0E37EF25205C15C1009D16D3 /* Views */,
 				0E37EF24205C15B9009D16D3 /* Models */,
 				0E1F0F4B2056D42300D1A939 /* LaunchScreen.storyboard */,
+				0E1F0F432056D42300D1A939 /* Main.storyboard */,
 			);
 			path = "Docker Client";
 			sourceTree = "<group>";
@@ -179,7 +186,6 @@
 				0E2FBF64207E321A00C9CB9D /* Volume.swift */,
 				0EEF6667208667EC00811605 /* Person.swift */,
 				0E2C6CF5209075F000D49C17 /* Server.swift */,
-				0E1F0F432056D42300D1A939 /* Main.storyboard */,
 				0E1F0F462056D42300D1A939 /* Docker_Client.xcdatamodeld */,
 			);
 			path = Models;
@@ -189,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				0E37EF31205C1D7A009D16D3 /* ContainerTableViewCell.swift */,
+				0E2C6CFB20907A7100D49C17 /* SettingsServerTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +205,8 @@
 			children = (
 				0E37EF22205C15B3009D16D3 /* ContainersTableViewController.swift */,
 				0E37EF36205C2E25009D16D3 /* ContainerViewController.swift */,
+				0E2C6CF72090776F00D49C17 /* SettingsTableViewController.swift */,
+				0E2C6CF9209079C300D49C17 /* SettingsServersTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -550,14 +559,17 @@
 				0E37EF32205C1D7A009D16D3 /* ContainerTableViewCell.swift in Sources */,
 				0EEF665C208638E000811605 /* RequestManager+ResponseHandler.swift in Sources */,
 				0EEF6668208667EC00811605 /* Person.swift in Sources */,
+				0E2C6CF82090776F00D49C17 /* SettingsTableViewController.swift in Sources */,
 				0E2FBF65207E321A00C9CB9D /* Volume.swift in Sources */,
 				0EEF665E2086613D00811605 /* RequestManager+Constants.swift in Sources */,
 				0E37EF37205C2E25009D16D3 /* ContainerViewController.swift in Sources */,
 				0EEF665A2086389C00811605 /* RequestManager.swift in Sources */,
+				0E2C6CFC20907A7100D49C17 /* SettingsServerTableViewCell.swift in Sources */,
 				0E1F0F482056D42300D1A939 /* Docker_Client.xcdatamodeld in Sources */,
 				0E37EF35205C2C80009D16D3 /* UIUtils.swift in Sources */,
 				0E37EF30205C1C5D009D16D3 /* Container.swift in Sources */,
 				0EEF66602086668100811605 /* DataManager.swift in Sources */,
+				0E2C6CFA209079C300D49C17 /* SettingsServersTableViewController.swift in Sources */,
 				0E2C6CF6209075F000D49C17 /* Server.swift in Sources */,
 				0E1F0F402056D42300D1A939 /* AppDelegate.swift in Sources */,
 			);

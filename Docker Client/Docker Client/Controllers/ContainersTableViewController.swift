@@ -25,8 +25,32 @@ class ContainersTableViewController: UITableViewController {
         DataManager.shared.delegate = self
         title = "Containers"
         
-        fillContainers()
-        self.tableView.reloadData()
+//        fillContainers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if DataManager.shared.person.servers.count == 0 {
+            let alert = UIAlertController(title: "Add server", message: "You can add more in settings", preferredStyle: .alert)
+            
+            alert.addTextField() { (textField) in
+                textField.placeholder = "Name"
+            }
+            
+            alert.addTextField() { (textField) in
+                textField.placeholder = "URL"
+            }
+            
+            let action = UIAlertAction(title: "ADd", style: .default) { (alertAction) in
+                let name = alert.textFields![0].text
+                let url = alert.textFields![1].text
+                
+//                let pattern = "^http://[A-Za-z0-9.-]{3,}.[A-Za-z]{3}(?::d+)$"
+//                let regex = try! NSRegularExpression(pattern: pattern)
+                
+            }
+        }
     }
     
     private func fillContainers() {

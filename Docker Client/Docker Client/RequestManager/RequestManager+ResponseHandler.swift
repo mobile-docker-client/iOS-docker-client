@@ -15,14 +15,15 @@ enum RequestType {
     case containerActionWith(String, ContainerAction)
     case inspectContainerWith(String)
     
+    // FIXME: Change server
     func path() -> String {
         switch self {
         case .allContainers:
-            return DataManager.shared.person.server! + BackendString.pthAllContainers
+            return DataManager.shared.person.servers[0].url! + BackendString.pthAllContainers
         case let .containerActionWith(id, action):
-            return DataManager.shared.person.server! + "\(BackendString.pthContainers)/\(id)/\(action.rawValue)"
+            return DataManager.shared.person.servers[0].url! + "\(BackendString.pthContainers)/\(id)/\(action.rawValue)"
         case let .inspectContainerWith(id):
-            return DataManager.shared.person.server! + "\(BackendString.pthContainers)/\(id)/json"
+            return DataManager.shared.person.servers[0].url! + "\(BackendString.pthContainers)/\(id)/json"
         }
     }
 }
